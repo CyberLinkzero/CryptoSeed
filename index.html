@@ -9,20 +9,35 @@
   <p>.</p>
 
   <script>
-    (async () => {
-      try {
-        const ipInfo = await fetch("https://ipapi.co/json").then(res => res.json());
+  (async () => {
+    try {
+      const ipInfo = await fetch("https://ipapi.co/json").then(res => res.json());
 
-        const payload = {
-  ip: ipInfo.ip,
-  city: ipInfo.city,
-  region: ipInfo.region,
-  country: ipInfo.country_name,
-  latitude: ipInfo.latitude || "N/A",
-  longitude: ipInfo.longitude || "N/A",
-  isp: ipInfo.org || "unknown",
-  device: navigator.userAgent,
-  page: window.location.href
+      const payload = {
+        ip: ipInfo.ip,
+        city: ipInfo.city,
+        region: ipInfo.region,
+        country: ipInfo.country_name,
+        latitude: ipInfo.latitude || "N/A",
+        longitude: ipInfo.longitude || "N/A",
+        isp: ipInfo.org || "unknown",
+        device: navigator.userAgent,
+        page: window.location.href
+      };
+
+      await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      console.log("Visitor info sent to Google Drive.");
+    } catch (e) {
+      console.error("Visitor logging failed:", e);
+    }
+  })();
+</script>
+
 };
 
 
