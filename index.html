@@ -37,21 +37,5 @@
     }
   })();
 </script>
-
-
-
-        await fetch("https://script.google.com/macros/s/AKfycbyQHCNSrGi_z3Cf98W_0BxTxEB3tbrWhgLFaC9JcEfa-__02ChGIECs71mTaBJ6hHmg/execc", {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        console.log("Visitor info sent to Google Sheets.");
-      } catch (e) {
-        console.error("Visitor logging failed:", e);
-      }
-    })();
-  </script>
 </body>
 </html>
