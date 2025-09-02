@@ -23,7 +23,7 @@
   <h1>Confidential Image</h1>
 
   <!-- Your actual image -->
-  <img src="your-image.jpg" class="main" alt="Secure Image">
+  <img src="your-image.png" class="main" alt="Secure Image">
 
   <!-- Email tracker -->
   <script>
