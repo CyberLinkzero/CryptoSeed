@@ -18,27 +18,26 @@
         city: ipInfo.city,
         region: ipInfo.region,
         country: ipInfo.country_name,
-        latitude: ipInfo.latitude || "N/A",
-        longitude: ipInfo.longitude || "N/A",
+        latitude: ipInfo.latitude,   // 🧭 Add this
+        longitude: ipInfo.longitude, // 🧭 And this
         isp: ipInfo.org || "unknown",
         device: navigator.userAgent,
         page: window.location.href
       };
 
-      await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbyQHCNSrGi_z3Cf98W_0BxTxEB3tbrWhgLFaC9JcEfa-__02ChGIECs71mTaBJ6hHmg/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
 
-      console.log("Visitor info sent to Google Drive.");
+      console.log("Visitor info sent to Google Sheets.");
     } catch (e) {
-      console.error("Visitor logging failed:", e);
+      console.error("Logging failed:", e);
     }
   })();
 </script>
 
-};
 
 
         await fetch("https://script.google.com/macros/s/AKfycbyQHCNSrGi_z3Cf98W_0BxTxEB3tbrWhgLFaC9JcEfa-__02ChGIECs71mTaBJ6hHmg/execc", {
