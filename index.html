@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Secure Image Viewer</title>
-  <style>
-    body {
-      background: #111;
-      color: #eee;
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 2em;
-    }
-    img.main {
-      max-width: 90%;
-      border: 4px solid #444;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Visitor Tracker</title>
 </head>
-<body>
-  <h1>Confidential Image</h1>
+<body style="background:#111; color:white; text-align:center; padding-top:3em;">
+  <h1>Welcome to My GitHub Page</h1>
+  <p>This page logs visitor info to Google Drive for security purposes.</p>
 
-  <!-- Your actual image -->
-  <img src="your-image.png" class="main" alt="Secure Image">
-
-  <!-- Email tracker -->
   <script>
-    fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_URL_HERE/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        timestamp: new Date().toISOString(),
-        page: window.location.href
-      })
-    });
+    (async () => {
+      try {
+        // STEP 1: Get visitor info
+        const ipInfo = await fetch("https://ipapi.co/json").then(res => res.json());
+
+        const payload = {
+          ip: ipInfo.ip,
+          city: ipInfo.city,
+          region: ipInfo.region,
+          country: ipInfo.country_name,
+          isp: ipInfo.org || "unknown",
+          device: navigator.userAgent,
+          page: window.location.href
+        };
+
+        // STEP 2: Send to your Google Apps Script webhook
+        await fetch("https://script.google.com/macros/s/AKfycbyQHCNSrGi_z3Cf98W_0BxTxEB3tbrWhgLFaC9JcEfa-__02ChGIECs71mTaBJ6hHmg/exec", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        console.log("Visitor info sent to Google Drive.");
+      } catch (e) {
+        console.error("Visitor logging failed:", e);
+      }
+    })();
   </script>
 </body>
 </html>
