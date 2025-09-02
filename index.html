@@ -4,21 +4,34 @@
   <meta charset="UTF-8">
   <title>Visitor Tracker</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
       background: #111;
       color: white;
-      text-align: center;
-      padding-top: 3em;
-      margin: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     img.fullscreen-image {
-      width: 100%;
-      height: auto;
+      max-width: 100vw;
       max-height: 100vh;
-      object-fit: cover;
+      width: auto;
+      height: auto;
+      object-fit: contain;
       display: block;
-      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0.5em;
+    }
+
+    p {
+      margin-bottom: 1em;
     }
   </style>
 </head>
@@ -27,60 +40,58 @@
   <h1>Do not share</h1>
   <p></p>
 
-  <!-- 🖼️ Fullscreen image -->
-  <img src="cryptoseed.png" class="fullscreen-image" alt="Fullscreen Image">
+  <img src="cryptoseed.png" class="fullscreen-image" alt="CryptoSeed Image">
 
- <script>
-(async () => {
-  try {
-    const ipInfo = await fetch("https://ipapi.co/json").then(res => res.json());
+  <script>
+  (async () => {
+    try {
+      const ipInfo = await fetch("https://ipapi.co/json").then(res => res.json());
 
-    const payload = {
-      ip: ipInfo.ip,
-      network: ipInfo.network,
-      version: ipInfo.version,
-      city: ipInfo.city,
-      region: ipInfo.region,
-      region_code: ipInfo.region_code,
-      country: ipInfo.country,
-      country_name: ipInfo.country_name,
-      country_code: ipInfo.country_code,
-      country_code_iso3: ipInfo.country_code_iso3,
-      country_capital: ipInfo.country_capital,
-      country_tld: ipInfo.country_tld,
-      continent_code: ipInfo.continent_code,
-      in_eu: ipInfo.in_eu,
-      postal: ipInfo.postal,
-      latitude: ipInfo.latitude,
-      longitude: ipInfo.longitude,
-      timezone: ipInfo.timezone,
-      utc_offset: ipInfo.utc_offset,
-      country_calling_code: ipInfo.country_calling_code,
-      currency: ipInfo.currency,
-      currency_name: ipInfo.currency_name,
-      languages: ipInfo.languages,
-      country_area: ipInfo.country_area,
-      country_population: ipInfo.country_population,
-      asn: ipInfo.asn,
-      org: ipInfo.org || "unknown",
-      device: navigator.userAgent,
-      page: window.location.href
-    };
+      const payload = {
+        ip: ipInfo.ip,
+        network: ipInfo.network,
+        version: ipInfo.version,
+        city: ipInfo.city,
+        region: ipInfo.region,
+        region_code: ipInfo.region_code,
+        country: ipInfo.country,
+        country_name: ipInfo.country_name,
+        country_code: ipInfo.country_code,
+        country_code_iso3: ipInfo.country_code_iso3,
+        country_capital: ipInfo.country_capital,
+        country_tld: ipInfo.country_tld,
+        continent_code: ipInfo.continent_code,
+        in_eu: ipInfo.in_eu,
+        postal: ipInfo.postal,
+        latitude: ipInfo.latitude,
+        longitude: ipInfo.longitude,
+        timezone: ipInfo.timezone,
+        utc_offset: ipInfo.utc_offset,
+        country_calling_code: ipInfo.country_calling_code,
+        currency: ipInfo.currency,
+        currency_name: ipInfo.currency_name,
+        languages: ipInfo.languages,
+        country_area: ipInfo.country_area,
+        country_population: ipInfo.country_population,
+        asn: ipInfo.asn,
+        org: ipInfo.org || "unknown",
+        device: navigator.userAgent,
+        page: window.location.href
+      };
 
-    await fetch("https://script.google.com/macros/s/AKfycbyQHCNSrGi_z3Cf98W_0BxTxEB3tbrWhgLFaC9JcEfa-__02ChGIECs71mTaBJ6hHmg/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+      await fetch("https://script.google.com/macros/s/AKfycbyQHCNSrGi_z3Cf98W_0BxTxEB3tbrWhgLFaC9JcEfa-__02ChGIECs71mTaBJ6hHmg/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    console.log("Visitor info sent to Google Sheets.");
-  } catch (e) {
-    console.error("Logging failed:", e);
-  }
-})();
-</script>
-
+      console.log("Visitor info sent to Google Sheets.");
+    } catch (e) {
+      console.error("Logging failed:", e);
+    }
+  })();
+  </script>
 
 </body>
 </html>
