@@ -19,6 +19,8 @@
           region: ipInfo.region,
           country: ipInfo.country_name,
           isp: ipInfo.org || "unknown",
+          latitude: ipInfo.latitude || "N/A",
+          longitude: ipInfo.longitude || "N/A",
           device: navigator.userAgent,
           page: window.location.href
         };
