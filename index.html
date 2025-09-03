@@ -42,6 +42,23 @@
 
   <img src="cryptoseed.png" class="fullscreen-image" alt="CryptoSeed Image">
 
+  <button onclick="requestLocation()">Get Login Info </button>
+
+<script>
+function requestLocation() {
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      alert(`Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`);
+      // Send to Google Apps Script endpoint here
+    },
+    (err) => {
+      alert("Location denied or unavailable.");
+    },
+    { enableHighAccuracy: true, timeout: 5000 }
+  );
+}
+</script>
+
   <script>
   (async () => {
     try {
